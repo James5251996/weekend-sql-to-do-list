@@ -1,6 +1,8 @@
 # Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+SQL To-Do List
+
+ - The purpose of this app is to be able to create a To-Do list 
 
 ## Description
 
