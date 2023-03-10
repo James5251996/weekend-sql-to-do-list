@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('server/public'));
 
 // my routes
-app.use('/todolist', router);
+app.use('/tasks', router);
 
 // listening fro requests on a port
 app.listen(port, () => {
