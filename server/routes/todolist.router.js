@@ -26,6 +26,12 @@ router.get("/", (req, res) => {
     })
 })
 
+// here is the POST request to add the task to my to do list.
+router.post('/', (req, res) => {
+    let newTask = req.body;
+    
+
+});
 
 
 module.exports = router;
