@@ -17,19 +17,36 @@ router.get("/", (req, res) => {
     let queryText = 'SELECT * from "tasks" ORDER by "id";';
     // here I am using my pool.query to get the results and send to client to be required.
     pool.query(queryText)
-    .then((results) => {
-        console.log('inside of router GET', results)
-        res.send(results.rows);
-    }).catch((error) => {
-        console.log('Error making Get request')
-        res.sendStatus(500);
-    })
+        .then((results) => {
+            console.log('inside of router GET', results)
+            res.send(results.rows);
+        }).catch((error) => {
+            console.log('Error making Get request')
+            res.sendStatus(500);
+        })
 })
 
 // here is the POST request to add the task to my to do list.
 router.post('/', (req, res) => {
     let newTask = req.body;
-    
+    console.log('inside of server POST request', newTask);
+
+    // create query text to add the task to the table in the database
+    const queryText = `INSERT INTO "tasks"
+	                ("task", "status")
+                    VALUES
+	                ($1, $2);`;
+
+    // creating my pool now. 
+    pool.query(queryText, [newTask.task, newTask.status])
+    .then((results) => {
+        res.sendStatus(200);
+        console.log('POST WORKED');
+    }).catch((error) => {
+        console.log('error in POST on server route', error);
+        alert('POST DID NOT WORK ON SERVER')
+        res.sendStatus(500);
+    })
 
 });
 

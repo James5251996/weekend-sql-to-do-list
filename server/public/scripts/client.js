@@ -4,12 +4,38 @@ console.log('JS is sourced properly')
 $(document).ready(onReady);
 
 function onReady() {
-    // here i will create a object that will store the data.
-    let tasks = {
-        task: $('.taskInput').val(),
-    };
     // here i will add my Get request function so that the table loads when the page is refreshed.
     getTasks()
+    // here is my listenr so when i click on the add button it will add the task i want.
+    $('#addBtn').on('click', addTask);
+};
+
+// My POST ajax request
+function addTask () {
+    // test console.log to make sure the function is called when i use the add button.
+    console.log('inside of my add task function')
+
+    let tasks = {
+        task: $('.taskInput').val(),
+        status: $('#checkBox').val(),
+    };
+    // i will create an if statement so that the add button will not work.
+    // unless there is an input value in the input box first
+    if (tasks.task) {
+        $.ajax({
+            method: 'POST',
+            url: '/tasks',
+            data: tasks,
+        }).then((response) => {
+            console.log('inside ajax post request');
+            getTasks();
+        }).catch((error) => {
+            console.log('error in ajax post', error);
+            alert('AJAX POST FAILED');
+        })
+    } else {
+        alert('MISSING INPUTS')
+    }
 };
 
 // My Get ajax Request
