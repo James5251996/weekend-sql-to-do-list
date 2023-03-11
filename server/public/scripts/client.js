@@ -8,9 +8,26 @@ function onReady() {
     getTasks()
     // here is my listenr so when i click on the add button it will add the task i want.
     $('#addBtn').on('click', addTask);
+
+    // here is my listener so when i click on the check box it runs the task complete function.
+    $('#addToTable').on('click', '#checkBox', taskComplete)
 };
 
 // here is where my client side PUT will be to update the status upon completion to true.
+function taskComplete () {
+    console.log('inside of task complete function');
+    const taskComplete = $(this).parent().parent().data().id;
+    console.log('id of task to complete is', taskComplete);
+
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/status/${taskComplete}`
+    }).then((response) => {
+        getTasks();
+    }).catch((error) => {
+        alert('ERROR MAKING CLIENT PUT');
+    })
+}
 
 
 // My POST ajax request
@@ -63,8 +80,9 @@ function renderTasks(tasks) {
     console.log('inside of render tasks function')
     $('#addToTable').empty();
     for (task of tasks) {
+        if (task.status) {
         $('#addToTable').append(`
-        <tr data-id=${task.id}>
+        <tr data-id=${task.id} style="background-color:green">
             <td>${task.task}</td>
             <td><input type="checkbox" id="checkBox" value="false">
             <label for="checkBox">Completed</label>
@@ -72,5 +90,16 @@ function renderTasks(tasks) {
             <td><button id="deleteBtn">Delete</button></td>
         </tr>
         `)
+        } else {
+            $('#addToTable').append(`
+            <tr data-id=${task.id} style="background-color:gold">
+                <td>${task.task}</td>
+                <td><input type="checkbox" id="checkBox" value="false">
+                <label for="checkBox">Completed</label>
+                </td>
+                <td><button id="deleteBtn">Delete</button></td>
+            </tr>
+            `)
+        }
     }
 }

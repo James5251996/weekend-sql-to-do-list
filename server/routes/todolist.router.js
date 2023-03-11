@@ -9,7 +9,11 @@ const pool = new pg.Pool({
     port: 5432,
 })
 
-// here is mu PUT request on the server side
+// here is my DELETE request
+
+
+
+// here is my PUT request on the server side
 router.put('/status/:id', (req, res) => {
     const taskID = req.params.id;
     console.log('task that will get completed is,', taskID);
