@@ -84,8 +84,8 @@ function renderTasks(tasks) {
         $('#addToTable').append(`
         <tr data-id=${task.id} style="background-color:green">
             <td>${task.task}</td>
-            <td><input type="checkbox" id="checkBox" value="false">
-            <label for="checkBox">Completed</label>
+            <td>
+            Completed
             </td>
             <td><button id="deleteBtn">Delete</button></td>
         </tr>
@@ -95,7 +95,7 @@ function renderTasks(tasks) {
             <tr data-id=${task.id} style="background-color:gold">
                 <td>${task.task}</td>
                 <td><input type="checkbox" id="checkBox" value="false">
-                <label for="checkBox">Completed</label>
+                <label for="checkBox">Complete</label>
                 </td>
                 <td><button id="deleteBtn">Delete</button></td>
             </tr>

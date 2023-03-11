@@ -10,7 +10,20 @@ const pool = new pg.Pool({
 })
 
 // here is my DELETE request
+router.delete('/:id', (req, res) => {
+    console.log('inside of delete request on server')
+    const taskToDelete = req.params.id;
+    const queryText = 'DELETE FROM "tasks" WHERE id=$1';
 
+    pool.query(queryText, [taskToDelete])
+    .then((results) => {
+        console.log('delete task worked on server')
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('error in delete request on server', error);
+        res.sendStatus(500);
+    })
+})
 
 
 // here is my PUT request on the server side
