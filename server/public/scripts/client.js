@@ -11,7 +11,29 @@ function onReady() {
 
     // here is my listener so when i click on the check box it runs the task complete function.
     $('#addToTable').on('click', '#checkBox', taskComplete)
+
+    // here is my listener for my delete button to run my deletetask function
+    $('#addToTable').on('click', '#deleteBtn', deleteTask)
 };
+
+// here is my delete task function
+function deleteTask () {
+console.log('inside of my delete task function');
+
+const taskToDelete = $(this).parent().parent().data().id;
+
+$.ajax({
+    method: 'DELETE',
+    url: `/tasks/${taskToDelete}`
+}).then((response) => {
+    console.log('delete worked on client side')
+    getTasks();
+}).catch((error) => {
+    alert('DELETE ON CLIENT DID NOT WORK');
+})
+}
+
+
 
 // here is where my client side PUT will be to update the status upon completion to true.
 function taskComplete () {
