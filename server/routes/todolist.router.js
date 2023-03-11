@@ -9,6 +9,23 @@ const pool = new pg.Pool({
     port: 5432,
 })
 
+// here is mu PUT request on the server side
+router.put('/status/:id', (req, res) => {
+    const taskID = req.params.id;
+    console.log('task that will get completed is,', taskID);
+
+    const queryText = `UPDATE "tasks" SET "status" = 'true' WHERE "id"=$1;`
+
+    pool.query(queryText, [taskID])
+    .then((results) => {
+        console.log('inside server side PUT');
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('error in server side PUT', error);
+        res.sendStatus(500);
+    });
+})
+
 // this is my GET request on my router to get the results
 // from the database and then will send to the client.
 router.get("/", (req, res) => {

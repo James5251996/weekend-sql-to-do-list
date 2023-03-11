@@ -10,6 +10,9 @@ function onReady() {
     $('#addBtn').on('click', addTask);
 };
 
+// here is where my client side PUT will be to update the status upon completion to true.
+
+
 // My POST ajax request
 function addTask () {
     // test console.log to make sure the function is called when i use the add button.
@@ -63,7 +66,7 @@ function renderTasks(tasks) {
         $('#addToTable').append(`
         <tr data-id=${task.id}>
             <td>${task.task}</td>
-            <td><input type="checkbox" id="checkBox" value="true">
+            <td><input type="checkbox" id="checkBox" value="false">
             <label for="checkBox">Completed</label>
             </td>
             <td><button id="deleteBtn">Delete</button></td>
