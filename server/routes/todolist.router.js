@@ -31,7 +31,7 @@ router.put('/status/:id', (req, res) => {
     const taskID = req.params.id;
     console.log('task that will get completed is,', taskID);
 
-    const queryText = `UPDATE "tasks" SET "status" = 'true' WHERE "id"=$1;`
+    const queryText = `UPDATE "tasks" SET "status" = NOT "status" WHERE "id"=$1;`
 
     pool.query(queryText, [taskID])
     .then((results) => {
