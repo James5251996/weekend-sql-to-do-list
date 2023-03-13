@@ -3,11 +3,23 @@ const router = express();
 const pg = require('pg');
 
 // create my pool so it will have the database info to pull
-const pool = new pg.Pool({
-    database: "weekend-to-do-app",
-    host: "localhost",
-    port: 5432,
-})
+let pool;
+
+if (process.env.DATABASE_URL) {
+    pool = new pg.Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false,
+        }
+    })
+} else {
+    const pool = new pg.Pool({
+        database: "weekend-to-do-app",
+        host: "localhost",
+        port: 5432,
+    })
+}
+
 
 // here is my DELETE request
 router.delete('/:id', (req, res) => {
