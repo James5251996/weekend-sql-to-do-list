@@ -119,7 +119,7 @@ function renderTasks(tasks) {
         `)
         } else {
             $('#addToTable').append(`
-            <tr data-id=${task.id} style="background-color:gold">
+            <tr data-id=${task.id} style="background-color:red">
                 <td>${task.task}</td>
                 <td><input type="checkbox" id="checkBox" value="false">
                 <label for="checkBox">Complete</label>
