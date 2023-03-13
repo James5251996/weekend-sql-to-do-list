@@ -51,6 +51,10 @@ function taskComplete () {
     })
 }
 
+// here i will create a clear input fields function to be called after the Post gets called.
+function clearInput () {
+    let input = $('.taskInput').val('');
+}
 
 // My POST ajax request
 function addTask () {
@@ -91,6 +95,7 @@ function getTasks() {
         console.log('inside GET ajax', response);
         // render to page function goes here.
         renderTasks(response);
+        clearInput();
     }).catch((error) => {
         console.log('error in Get ajax', error);
         alert('ERROR IN GET AJAX');
